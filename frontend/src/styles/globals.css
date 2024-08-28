@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    &,
+    &.light-mode {
+      --background-app-rgb: 249, 250, 251;
+      --color-primary-900: 74, 109, 255;
+      --color-primary-800: 92, 124, 255;
+      --color-primary-700: 110, 138, 255;
+      --color-primary-600: 128, 153, 255;
+      --color-primary-500: 146, 167, 255;
+      --color-primary-400: 164, 182, 255;
+      --color-primary-300: 183, 197, 255;
+      --color-primary-200: 201, 211, 255;
+      --color-primary-100: 219, 226, 255;
+      --color-primary-50: 228, 233, 255;
+      --color-secondary-900: 17, 24, 39;
+      --color-secondary-800: 31, 41, 55;
+      --color-secondary-700: 55, 65, 81;
+      --color-secondary-600: 75, 85, 99;
+      --color-secondary-500: 107, 114, 128;
+      --color-secondary-400: 156, 163, 175;
+      --color-secondary-300: 209, 213, 219;
+      --color-secondary-200: 229, 231, 235;
+      --color-secondary-100: 243, 244, 246;
+      --color-secondary-50: 249, 250, 251;
+      --color-secondary-0: 255, 255, 255;
+      --color-success: 0, 192, 115;
+      --color-warning: 255, 153, 0;
+      --color-error: 255, 71, 87;
+      --color-red-500: 239, 68, 68;
+      --color-red-300: 252, 165, 165;
+    }
+    &.dark-mode {
+      --background-app-rgb: 20, 20, 20;
+      --color-secondary-900: 249, 250, 251;
+      --color-secondary-800: 243, 244, 246;
+      --color-secondary-700: 229, 231, 235;
+      --color-secondary-600: 209, 213, 219;
+      --color-secondary-500: 156, 163, 175;
+      --color-secondary-400: 107, 114, 128;
+      --color-secondary-300: 75, 85, 99;
+      --color-secondary-200: 55, 65, 81;
+      --color-secondary-100: 31, 41, 55;
+      --color-secondary-50: 17, 24, 39;
+      --color-secondary-0: 24, 33, 47;
+      --backdrop-color: 0, 0, 0;
+    }
+  }
+}
+
+.rti--container {
+  background-color: rgb(var(--color-secondary-100));
+  --rti-radius: 0.375rem;
+  --rti-s: 0.5rem;
+  --rti-tag: #edf2f7;
+  --rti-tag-remove: #e53e3e;
+  border: none;
+}
+.rti--container .rti--input {
+  background-color: rgb(var(--color-secondary-200));
+  color: rgb(var(--color-secondary-800));
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.rti--tag {
+  color: rgb(var(--color-secondary-100));
+  background-color: rgb(var(--color-secondary-500));
+}
+
+@layer components {
+  .form {
+    @apply w-full max-w-lg flex flex-col gap-y-8 p-4 rounded-xl bg-secondary-0;
+  }
+  .textField__input {
+    @apply w-full py-3 px-4 border border-secondary-100 rounded-xl hover:border-primary-500 focus:border-primary-500 text-secondary-900 bg-secondary-100 focus:bg-secondary-0 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200 transition-all duration-300 ease-out;
+  }
+  .btn {
+    @apply py-3 px-3 rounded-xl transition-all duration-300;
+  }
+  .btn--primary {
+    @apply text-primary-100 bg-primary-900 hover:bg-primary-700;
+  }
+  .btn--secondary {
+    @apply text-secondary-100 bg-secondary-600;
+  }
+  .btn--outline {
+    @apply text-secondary-400 border border-secondary-300;
+  }
+  .btn--danger {
+    @apply text-rose-700 border border-rose-700;
+  }
+  .badge {
+    @apply inline-block py-0.5 px-2 rounded-xl whitespace-nowrap;
+  }
+  .badge--primary {
+    @apply text-white bg-primary-900;
+  }
+  .badge--secondary {
+    @apply text-secondary-600 bg-secondary-200;
+  }
+  .badge--success {
+    @apply text-white bg-green-500;
+  }
+  .badge--danger {
+    @apply text-white bg-red-500;
+  }
+
+  .spinner {
+    width: 60px;
+    aspect-ratio: 1;
+    margin: 3.2rem auto 1.6rem;
+    border: 8px solid rgb(var(--color-primary-900));
+    border-radius: 50%;
+    border-right-color: rgb(var(--color-primary-200));
+    animation: rotate 1s infinite linear;
+  }
+
+  .spinner-mini {
+    width: 20px;
+    aspect-ratio: 1;
+    margin: 0;
+    border: 2px solid rgb(var(--color-primary-200));
+    border-radius: 50%;
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  /* border: none; */
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-family: var(--vazir-font);
+  background-color: rgb(var(--background-app-rgb));
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+button:disabled {
+  color: rgb(var(--color-secondary-700), 0.5);
+  background-color: rgb(var(--color-secondary-300), 0.5);
+  box-shadow: none;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* inupt number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* TABLE */
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table .title-row {
+  background-color: rgb(var(--color-secondary-100));
+}
+
+table td,
+table th {
+  border-bottom: 1px solid rgb(var(--color-secondary-200));
+  text-align: right;
+  white-space: nowrap;
+}
+
+table th {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: rgb(var(--color-secondary-600));
+}
+a {
+  display: block;
+}
+table td {
+  padding: 1rem 1rem;
+  font-size: 0.85rem;
+  color: rgb(var(--color-secondary-600));
+}
+
+/* comment  indicator */
+
+.post-comments .post-comments__answer {
+  position: relative;
+}
+.post-comments .post-comments__answer::before {
+  width: 3px;
+  height: 100%;
+  content: "";
+  display: block;
+  position: absolute;
+  top: -13px;
+  right: -15px;
+  background-color: rgb(var(--color-secondary-200));
+}
+
+.post-comments .post-comments__answer .answer-item::before {
+  content: "";
+  width: 15px;
+  height: 3px;
+  display: block;
+  position: relative;
+  top: 57px;
+  right: -31px;
+  z-index: 10;
+  background-color: rgb(var(--color-secondary-200));
+}
+
+.post-comments .post-comments__answer .last-item:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: calc(100% - 80px);
+  top: 76px;
+  right: -15px;
+  background-color: rgb(var(--color-secondary-200));
+}
+
+@media (max-width: 640px) {
+  .post-comments .post-comments__answer::before {
+    display: none;
+  }
+  .post-comments .post-comments__answer .answer-item::before {
+    width: 3px;
+    height: 14px;
+    position: absolute;
+    top: -13px;
+    right: 11px;
+  }
+}
