@@ -3,22 +3,23 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { signupApi } from "@/services/authService";
 import RHFTextField from "@/ui/RHFTextField";
 import Button from "@/ui/Button";
 
 const schema = yup
   .object({
-    name: yup
-      .string()
-      .min(5, "نام و نام خانوادگی نامعتبر است")
-      .max(30)
-      .required("نام و نام خانوادگی الزامی است"),
+    name: yup.string().min(5).max(30).required("نام و نام خانوادگی الزامی است"),
     email: yup.string().email("ایمیل نامعتبر است").required("ایمیل الزامی است"),
     password: yup.string().required("رمز عبور الزامی است"),
   })
   .required();
 
 const Signup = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -28,7 +29,17 @@ const Signup = () => {
     mode: "onTouched",
   });
 
-  const onSubmit = (values) => {};
+  const onSubmit = async (values) => {
+    console.log(values);
+
+    try {
+      const { user, message } = await signupApi(values);
+      toast.success(message);
+      router.push("/profile");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <div>
@@ -40,7 +51,6 @@ const Signup = () => {
           register={register}
           name="name"
           label="نام و نام خانوادگی"
-          isRequired
           errors={errors}
         />
         <RHFTextField
@@ -48,7 +58,6 @@ const Signup = () => {
           name="email"
           label="ایمیل"
           dir="ltr"
-          isRequired
           errors={errors}
         />
         <RHFTextField
@@ -57,13 +66,15 @@ const Signup = () => {
           name="password"
           label="رمز عبور"
           dir="ltr"
-          isRequired
           errors={errors}
         />
+        <Button
+          type="submit"
+          variant="primary"
+          className="btn btn--primary w-full py-3 px-4 rounded-xl">
+          تایید
+        </Button>
       </form>
-      <Button type="submit" variant="primary" className="w-full">
-        تایید
-      </Button>
     </div>
   );
 };
