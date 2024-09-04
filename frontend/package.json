@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "@hookform/resolvers": "^3.9.0",
     "eslint-config-next": "^15.0.0-rc.0",
     "next": "^15.0.0-rc.0",
     "react": "^19.0.0-rc-1eaccd82-20240816",
-    "react-dom": "^19.0.0-rc-1eaccd82-20240816"
+    "react-dom": "^19.0.0-rc-1eaccd82-20240816",
+    "react-hook-form": "^7.53.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "eslint": "^8",
