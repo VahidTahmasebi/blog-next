@@ -1,3 +1,10 @@
+import { Suspense } from "react";
+import PostList from "../_components/PostList";
+import Spinner from "@/ui/Spinner";
+
+export const revalidate = 10;
+export const experimental_ppr = true; // STATIC + DYNAMIC => PPR
+
 async function BlogPage() {
   return (
     <div>
@@ -13,7 +20,11 @@ async function BlogPage() {
         رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
         پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
       </p>
+      <Suspense fallback={<Spinner />}>
+        <PostList />
+      </Suspense>
     </div>
   );
 }
+
 export default BlogPage;
