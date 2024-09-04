@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { ClockIcon } from "@heroicons/react/24/outline";
+import { getPosts } from "@/services/postServices";
 import PostInteraction from "./PostInteraction";
 import Author from "./Author";
 import CoverImage from "./CoverImage";
 
 async function PostList() {
-  await new Promise((res) => setTimeout(res, 3000));
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
-  const {
-    data: { posts },
-  } = await res.json();
+  const posts = await getPosts();
 
   return posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
@@ -25,6 +22,7 @@ async function PostList() {
                 {post.title}
               </h2>
             </Link>
+
             {/* post author - readingTime */}
             <div className="flex items-center justify-between mb-4">
               <Author {...post.author} />
